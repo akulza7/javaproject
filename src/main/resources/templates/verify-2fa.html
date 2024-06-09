@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Verify 2FA</title>
+</head>
+<body class="bg-gray-200 flex justify-center items-center h-screen">
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Enter 2FA Code</h2>
+    <form th:action="@{/verify-2fa}" method="post">
+        <input type="hidden" name="_csrf" th:value="${csrfToken.token}" />
+        <div class="mb-4">
+            <label class="block text-gray-700">2FA Code</label>
+            <input type="text" name="otp" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Verify</button>
+        <div th:if="${error}" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4" role="alert">
+            <p th:text="${error}"></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
